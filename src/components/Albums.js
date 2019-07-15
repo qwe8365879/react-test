@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card, Spinner, Row, Col } from "react-bootstrap";
-// import { Route } from "react-router";
 import {Link } from "react-router-dom";
+import { AlbumService } from "../share/AlbumService"
 
 export class Albums extends Component {
   pageTitle = Albums.name;
@@ -10,13 +10,15 @@ export class Albums extends Component {
     albums: []
   };
 
+  constructor(props) {
+    super(props);
+    this.AlbumService = new AlbumService();
+  }
+
   componentDidMount() {
-      fetch("https://jsonplaceholder.typicode.com/albums")
-      .then(res => res.json())
-      .then((data) => {
-          this.setState({albums: data})
-      })
-      .catch(console.error);
+      this.AlbumService.getAllAlbums(1).then((data) => {
+        this.setState({albums: data})
+      });
   }
 
   render() {

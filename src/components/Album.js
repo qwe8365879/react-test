@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Jumbotron, Container, Spinner, Row, Col, Button } from "react-bootstrap";
+import { PhotoService } from "../share/PhotoService"
+import { AlbumService } from "../share/AlbumService"
 
 export class Album extends Component {
     pageTitle = Album.name;
@@ -11,25 +13,20 @@ export class Album extends Component {
     
     constructor(props) {
         super(props);
+        this.photoService = new PhotoService();
+        this.albumService = new AlbumService();
         this.onEditAlbum = this.onEditAlbum.bind(this);
         this.onNewPhoto = this.onNewPhoto.bind(this);
         this.onDeletePhoto = this.onDeletePhoto.bind(this);
     }
     
     componentDidMount() {
-        fetch("https://jsonplaceholder.typicode.com/albums/"+this.props.match.params.id)
-        .then(res => res.json())
-        .then((data) => {
+        this.albumService.getAlbum(this.props.match.params.id).then((data) => {
             this.setState({album: data})
-        })
-        .catch(console.error);
-
-        fetch("https://jsonplaceholder.typicode.com/albums/"+this.props.match.params.id+"/photos")
-        .then(res => res.json())
-        .then((data) => {
+        });
+        this.photoService.getPhotoByAlbum(this.props.match.params.id).then((data) => {
             this.setState({photos: data})
-        })
-        .catch(console.error);
+        });
     }
 
     render() {
