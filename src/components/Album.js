@@ -47,14 +47,13 @@ export class Album extends Component {
                 <Row>
                 {
                     this.state.photos.length > 0 ? this.state.photos.map((photo) => (
-                    <Col key={photo.id}>
+                    <Col xs={3} key={photo.id}>
                         <Card style={{ width: "18rem" }}>
                             <Card.Img variant="top" src={photo.thumbnailUrl}/>
                             <Card.Body>
-                                <Card.Title>{photo.title}</Card.Title>
+                                <Card.Title>Photo {photo.id}</Card.Title>
                                 <Card.Text>
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
+                                {photo.title}
                                 </Card.Text>
                             </Card.Body>
                             <Card.Footer>

@@ -34,7 +34,7 @@ export class PhotoService {
   }
 
   async getPhotoByAlbum(albumId) {
-    return fetch(this.config.ALBUM_URL+albumId+"/photos")
+    return fetch(this.config.PHOTO_URL+"?albumId="+albumId)
       .then(response => {
         if (!response.ok) {
             this.errorHandleService.handleResponseError(response);
