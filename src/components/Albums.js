@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Card, Button, Spinner, Row, Col } from "react-bootstrap";
+import { Card, Spinner, Row, Col } from "react-bootstrap";
 // import { Route } from "react-router";
-import { Route, Link } from "react-router-dom";
-
-import { Album } from './Album'
+import {Link } from "react-router-dom";
 
 export class Albums extends Component {
   pageTitle = Albums.name;
